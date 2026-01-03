@@ -56,10 +56,18 @@ export function HomeTopActions({
             className="
               fixed top-4 left-4 z-50
               md:hidden
+
               flex h-9 w-9 items-center justify-center
-              rounded-full
-              bg-background/80 backdrop-blur
-              hover:bg-accent
+
+              bg-transparent
+              rounded-none
+
+              hover:bg-transparent
+              active:bg-transparent
+              focus:bg-transparent
+
+              focus:outline-none
+              [-webkit-tap-highlight-color:transparent]
             "
           >
             <Menu className="h-5 w-5 text-foreground pointer-events-none" />

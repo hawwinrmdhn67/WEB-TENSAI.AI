@@ -1,13 +1,22 @@
 export default function Footer() {
+  const year = new Date().getFullYear()
+
   return (
     <footer className="py-6 text-xs text-muted-foreground">
-      <div className="mx-auto flex max-w-7xl justify-between px-6">
-        <p>© {new Date().getFullYear()} Tensai</p>
-        <div className="flex gap-4">
-          <a href="#" className="hover:text-foreground">Privacy</a>
-          <a href="#" className="hover:text-foreground">Terms</a>
-          <a href="#" className="hover:text-foreground">About</a>
-        </div>
+      <div className="mx-auto max-w-7xl px-6">
+        <nav className="flex flex-wrap items-center gap-4">
+          <span>© {year} Tensai</span>
+
+          <a href="#" className="hover:text-foreground transition-colors">
+            Privacy
+          </a>
+          <a href="#" className="hover:text-foreground transition-colors">
+            Terms
+          </a>
+          <a href="#" className="hover:text-foreground transition-colors">
+            About
+          </a>
+        </nav>
       </div>
     </footer>
   )

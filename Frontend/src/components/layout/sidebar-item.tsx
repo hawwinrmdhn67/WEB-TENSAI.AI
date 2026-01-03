@@ -24,8 +24,6 @@ export function SidebarItem({
         h-10 w-full cursor-pointer
         rounded-full
 
-        ${!expanded && "hover:bg-accent/40"}
-
         ${
           expanded
             ? active
@@ -36,7 +34,12 @@ export function SidebarItem({
       `}
     >
       {/* ICON */}
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
+      <div
+        className={`
+          flex h-10 w-10 shrink-0 items-center justify-center rounded-full
+          ${!expanded && "hover:bg-accent/40"}
+        `}
+      >
         <Icon
           className="
             h-4 w-4

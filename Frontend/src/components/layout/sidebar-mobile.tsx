@@ -13,7 +13,7 @@ const MENU = [
   { icon: Plus, label: "New chat" },
   { icon: Search, label: "Search" },
   { icon: Image, label: "Images" },
-  { icon: Grid, label: "Apps", active: true },
+  { icon: Grid, label: "Apps",  },
   { icon: Folder, label: "Projects" },
   { icon: MessageSquare, label: "Chats" },
 ]
