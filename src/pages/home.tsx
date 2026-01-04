@@ -88,60 +88,60 @@ export default function Home() {
 
   /* ================= SEND / RETRY ================= */
 
-const handleSend = async (retryText?: string) => {
-  const text = retryText ?? message
-  if (!text.trim() || typing || streaming) return
+  const handleSend = async (retryText?: string) => {
+    const text = retryText ?? message
+    if (!text.trim() || typing || streaming) return
 
-  lastPromptRef.current = text
-  shouldSmoothScroll.current = true
+    lastPromptRef.current = text
+    shouldSmoothScroll.current = true
 
-  setMessages(p => [...p, { role: "user", content: text }])
-  setMessage("")
-  setTyping(true)
-  setStreaming(true)
+    setMessages(p => [...p, { role: "user", content: text }])
+    setMessage("")
+    setTyping(true)
+    setStreaming(true)
 
-  try {
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: text,
-        model: "xiaomi/mimo-v2-flash:free",
-      }),
-    })
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: text,
+          model: "xiaomi/mimo-v2-flash:free",
+        }),
+      })
 
-    if (!res.ok) {
-      throw new Error(`Server error: ${res.status}`)
+      if (!res.ok) {
+        throw new Error(`Server error: ${res.status}`)
+      }
+
+      const data = await res.json()
+      const reply =
+        data?.reply?.trim() || "⚠️ Tidak ada balasan dari AI"
+
+      // bubble assistant kosong (placeholder)
+      setMessages(p => [...p, { role: "assistant", content: "" }])
+
+      const isCode = reply.includes("```")
+
+      await streamMessage(
+        reply,
+        isCode ? 48 : 28,
+        isCode ? 12 : 32
+      )
+    } catch (err) {
+      console.error(err)
+      setMessages(p => [
+        ...p,
+        {
+          role: "assistant",
+          content: "❌ Gagal terhubung ke server",
+        },
+      ])
+    } finally {
+      setTyping(false)
+      setStreaming(false)
     }
-
-    const data = await res.json()
-    const reply =
-      data?.reply?.trim() || "⚠️ Tidak ada balasan dari AI"
-
-    // bubble assistant kosong (placeholder)
-    setMessages(p => [...p, { role: "assistant", content: "" }])
-
-    const isCode = reply.includes("```")
-
-    await streamMessage(
-      reply,
-      isCode ? 48 : 28,
-      isCode ? 12 : 32
-    )
-  } catch (err) {
-    console.error(err)
-    setMessages(p => [
-      ...p,
-      {
-        role: "assistant",
-        content: "❌ Gagal terhubung ke server",
-      },
-    ])
-  } finally {
-    setTyping(false)
-    setStreaming(false)
   }
-}
 
   const isChat = messages.length > 0
 
@@ -229,63 +229,45 @@ const handleSend = async (retryText?: string) => {
                         {m.content}
                       </div>
                     ) : (
-                      <div className="max-w-[80%] space-y-1">
-                        <ChatMarkdown
-                          content={softenMarkdown(m.content)}
-                        />
+                      <div className="w-full space-y-1">
+                      <ChatMarkdown content={softenMarkdown(m.content)} 
+                      />
 
                         {/* GPT ACTION BAR */}
-                        {!streaming &&
-                          i === messages.length - 1 && (
-                            <div className="flex items-center gap-1.5 text-muted-foreground">
-                              <button
-                                onClick={() => {
-                                  navigator.clipboard.writeText(
-                                    m.content
-                                  )
-                                  setCopiedIndex(i)
-                                  setTimeout(
-                                    () => setCopiedIndex(null),
-                                    1500
-                                  )
-                                }}
-                                className="rounded-md p-1.5 hover:bg-muted"
-                                title="Copy"
-                              >
-                                {copiedIndex === i ? (
-                                  <Check className="h-4 w-4 text-green-500" />
-                                ) : (
-                                  <Copy className="h-4 w-4" />
-                                )}
-                              </button>
+                        {!streaming && i === messages.length - 1 && (
+                        <div className="flex items-center gap-1.5 text-muted-foreground">
+                          <button
+                            onClick={() => {
+                              navigator.clipboard.writeText(m.content)
+                              setCopiedIndex(i)
+                              setTimeout(() => setCopiedIndex(null), 1500)
+                            }}
+                            className="rounded-md p-1.5 hover:bg-muted"
+                          >
+                            {copiedIndex === i ? (
+                              <Check className="h-4 w-4 text-green-500" />
+                            ) : (
+                              <Copy className="h-4 w-4" />
+                            )}
+                          </button>
 
-                              <button
-                                onClick={() =>
-                                  navigator.share?.({
-                                    text: m.content,
-                                  })
-                                }
-                                className="rounded-md p-1.5 hover:bg-muted"
-                                title="Share"
-                              >
-                                <Share2 className="h-4 w-4" />
-                              </button>
+                          <button
+                            onClick={() => navigator.share?.({ text: m.content })}
+                            className="rounded-md p-1.5 hover:bg-muted"
+                          >
+                            <Share2 className="h-4 w-4" />
+                          </button>
 
-                              <button
-                                onClick={() =>
-                                  handleSend(
-                                    lastPromptRef.current
-                                  )
-                                }
-                                className="rounded-md p-1.5 hover:bg-muted"
-                                title="Try again"
-                              >
-                                <RotateCcw className="h-4 w-4" />
-                              </button>
-                            </div>
-                          )}
-                      </div>
-                    )}
+                          <button
+                            onClick={() => handleSend(lastPromptRef.current)}
+                            className="rounded-md p-1.5 hover:bg-muted"
+                          >
+                            <RotateCcw className="h-4 w-4" />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   </div>
                 ))}
 
