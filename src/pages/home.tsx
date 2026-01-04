@@ -88,60 +88,60 @@ export default function Home() {
 
   /* ================= SEND / RETRY ================= */
 
-  const handleSend = async (retryText?: string) => {
-    const text = retryText ?? message
-    if (!text.trim() || typing || streaming) return
+const handleSend = async (retryText?: string) => {
+  const text = retryText ?? message
+  if (!text.trim() || typing || streaming) return
 
-    lastPromptRef.current = text
-    shouldSmoothScroll.current = true
+  lastPromptRef.current = text
+  shouldSmoothScroll.current = true
 
-    setMessages(p => [...p, { role: "user", content: text }])
-    setMessage("")
-    setTyping(true)
-    setStreaming(true)
+  setMessages(p => [...p, { role: "user", content: text }])
+  setMessage("")
+  setTyping(true)
+  setStreaming(true)
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: text,
-          model: "xiaomi/mimo-v2-flash:free",
-        }),
-      })
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: text,
+        model: "xiaomi/mimo-v2-flash:free",
+      }),
+    })
 
-      if (!res.ok) {
-        throw new Error(`Server error: ${res.status}`)
-      }
-
-      const data = await res.json()
-      const reply =
-        data?.reply?.trim() || "⚠️ Tidak ada balasan dari Tensai AI"
-
-      // bubble assistant kosong (placeholder)
-      setMessages(p => [...p, { role: "assistant", content: "" }])
-
-      const isCode = reply.includes("```")
-
-      await streamMessage(
-        reply,
-        isCode ? 48 : 28,
-        isCode ? 12 : 32
-      )
-    } catch (err) {
-      console.error(err)
-      setMessages(p => [
-        ...p,
-        {
-          role: "assistant",
-          content: "❌ Tensai AI Error",
-        },
-      ])
-    } finally {
-      setTyping(false)
-      setStreaming(false)
+    if (!res.ok) {
+      throw new Error(`Server error: ${res.status}`)
     }
+
+    const data = await res.json()
+    const reply =
+      data?.reply?.trim() || "⚠️ Tidak ada balasan dari AI"
+
+    // bubble assistant kosong (placeholder)
+    setMessages(p => [...p, { role: "assistant", content: "" }])
+
+    const isCode = reply.includes("```")
+
+    await streamMessage(
+      reply,
+      isCode ? 48 : 28,
+      isCode ? 12 : 32
+    )
+  } catch (err) {
+    console.error(err)
+    setMessages(p => [
+      ...p,
+      {
+        role: "assistant",
+        content: "❌ Gagal terhubung ke server",
+      },
+    ])
+  } finally {
+    setTyping(false)
+    setStreaming(false)
   }
+}
 
   const isChat = messages.length > 0
 

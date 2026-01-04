@@ -30,9 +30,16 @@ export async function callOpenRouter(
   )
 
   if (!res.ok) {
-    throw new Error(await res.text())
+    const text = await res.text()
+    console.error("OPENROUTER ERROR:", text)
+    throw new Error(text)
   }
 
   const data = (await res.json()) as ORResponse
+
+  if (!data.choices?.length) {
+    throw new Error("No choices returned from OpenRouter")
+  }
+
   return data.choices[0].message.content
 }
