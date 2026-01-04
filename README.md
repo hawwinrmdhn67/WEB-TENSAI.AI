@@ -1,7 +1,5 @@
-install dependensi tambahan
+Install Dependensi tambahan 
 
-npm install express cors dotenv concurrently
-npm install -D tsx
-npm install -D @types/express @types/cors
+npm install -D @vercel/node
 
 Created By hawwinrmdhn67
