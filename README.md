@@ -67,16 +67,38 @@ OPENROUTER_API_KEY=sk-xxxxxxxxxxxxxxxx
 
 ---
 
-## 🚀 Menjalankan Project
+## ⚙️ Development Mode
+
+Project ini menggunakan **Vercel Serverless Functions** (`/api/chat`),  
+oleh karena itu **disarankan menggunakan `vercel dev` saat development**.
+
+### 🔹 Development (Recommended)
+
+Menjalankan frontend + backend serverless sekaligus:
 
 ```bash
 npm install
-npm run dev
+vercel dev
 ```
+Akses: http://localhost:3000
 
-Akses: http://localhost:5173
+Vercel dev akan:
+- Menjalankan Vite frontend
+- Menjalankan API di folder /api
+- Membaca .env.local
 
 ---
+
+## Frontend Only (UI Development)
+
+Jika hanya ingin mengerjakan UI (tanpa API):
+
+```bash
+npm run dev
+```
+Akses: http://localhost:5173
+
+Mode ini tidak akan menjalankan /api/chat.
 
 ## ☁️ Deploy ke Vercel
 
@@ -84,6 +106,31 @@ Akses: http://localhost:5173
 2. Import ke Vercel
 3. Set `OPENROUTER_API_KEY`
 4. Deploy
+
+---
+
+## 🧠 Best Practice
+
+```md
+> Catatan!!!
+> Project ini tidak disarankan menggunakan `npm run dev` untuk full feature,  
+> karena API serverless hanya berjalan melalui `vercel dev` atau production environment Vercel.
+```
+
+---
+
+## 🔌 API Endpoint
+
+Saat development dengan vercel dev:
+
+```bash
+POST /api/chat
+```
+
+Saat production (Vercel):
+```bash
+https://your-domain.vercel.app/api/chat
+```
 
 ---
 
