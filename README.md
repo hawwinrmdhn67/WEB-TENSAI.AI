@@ -5,7 +5,7 @@ Aplikasi ini terintegrasi dengan **OpenRouter (Free AI Models)** untuk menghadir
 
 ---
 
-## Screenshoot 
+## 📸 Screenshoot 
 
 ### Tampilan dark mode
 <img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/5dcc6d1d-cb30-481b-9ce6-e898166b4925" />
