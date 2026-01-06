@@ -1,4 +1,4 @@
-# 🤖 Tensai AI — Web Chatbot AI
+# 🤖 Tensai AI Web Chatbot AI
 
 **Tensai AI** adalah aplikasi **web chatbot AI modern** yang dibangun menggunakan **React + Vite** di sisi frontend dan **Serverless API (Vercel)** di sisi backend.  
 Aplikasi ini terintegrasi dengan **OpenRouter (Free AI Models)** untuk menghadirkan pengalaman chat AI yang cepat, aman, dan mirip ChatGPT.
