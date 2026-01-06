@@ -5,6 +5,25 @@ Aplikasi ini terintegrasi dengan **OpenRouter (Free AI Models)** untuk menghadir
 
 ---
 
+## Screenshoot 
+
+### Tampilan dark mode
+<img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/5dcc6d1d-cb30-481b-9ce6-e898166b4925" />
+
+### Tampilan light mode
+<img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/63317ccc-9498-4cb0-b0c4-6bc815763e0b" />
+
+### Tampilan Text chat dark mode
+<img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/17534cf0-9418-4b5b-8f3f-234e3770902e" />
+<img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/39ef7fda-a5e4-4beb-8e97-90a0e6b7cee8" />
+<img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/86f9ad96-36d8-4c5f-8578-54bc2eae79b5" />
+
+### Tampilan text chat light mode
+<img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/d9065952-53a0-45c7-af80-e0cd4e57c33e" />
+<img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/44f1b4a9-1195-4979-8f45-660c5fdaf059" />
+<img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/0d5821f0-dc4a-4744-bc81-cb435b3d2eb2" />
+
+
 ## ✨ Fitur Utama
 
 - Realtime AI Chat
@@ -76,4 +95,4 @@ MIT License
 
 ## 👨‍💻 Author
 
-Tensai AI
+Tensai AI Created By hawwinrmdhn67
