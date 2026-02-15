@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function () {
+        const theme = localStorage.getItem("theme")
+        const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+
+        if (theme === "dark" || (!theme && systemDark)) {
+          document.documentElement.classList.add("dark")
+        }
+      })()
+    </script>
+
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo-tensai.jpeg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tensai-ai</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
