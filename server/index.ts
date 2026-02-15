@@ -78,7 +78,7 @@ app.get("/api/models", async (req, res) => {
 
     if (Array.isArray(groqData.data)) {
       const groqModels = groqData.data
-        .filter((m: any) => m.active) // hanya model aktif
+        .filter((m: any) => m.active) 
         .map((m: any) => ({
           label: m.id,
           model: m.id,
