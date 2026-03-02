@@ -45,7 +45,6 @@ Aplikasi ini terintegrasi dengan **Groq API (LLaMA, Qwen dan lain lain)** untuk 
 
 * Node.js (ES Module)
 * Express 5
-* Gemini API
 * Groq API
 * dotenv
 
